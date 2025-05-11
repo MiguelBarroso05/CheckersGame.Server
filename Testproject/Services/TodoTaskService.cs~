@@ -1,0 +1,61 @@
+﻿using Testproject.Data;
+using Testproject.Models;
+
+namespace Testproject.Services;
+
+public interface ITaskService
+{
+    List<TodoTask> Index();
+    void Create(TodoTask task);
+
+    void Update(TodoTask task);
+
+    TodoTask? Details(Guid id);
+    void Delete(Guid id);
+}
+
+public class TodoTaskService : ITaskService
+{
+    private readonly DataContext _context;
+
+    public TodoTaskService(DataContext context)
+    {
+        _context = context;
+    }
+
+    public List<TodoTask> Index()
+    {
+        return _context.TodoTasks.ToList();
+    }
+
+    public void Create(TodoTask task)
+    {
+        _context.Add(task);
+        _context.SaveChanges();
+    }
+
+    public void Update(TodoTask task)
+    {
+        _context.Update(task);
+        _context.SaveChanges();
+    }
+
+    public TodoTask? Details(Guid id)
+    {
+        TodoTask? task = _context.TodoTasks.Find(id);
+        return task ?? null;
+    }
+
+    public void Delete(Guid id)
+    {
+        TodoTask? task = _context.TodoTasks.Find(id);
+        if (task is null)
+        {
+            return;
+        }
+        _context.Remove(task);
+        _context.SaveChanges();
+    }
+
+
+}

@@ -1,0 +1,54 @@
+﻿using Testproject.Data;
+using Testproject.Models;
+
+namespace Testproject.Services;
+
+public interface ITaskService
+{
+    List<Task> Index();
+    void Create(Task task);
+    Task Details(int id);
+    void Delete(int id);
+    void Edit(Task task);
+} 
+
+
+
+public class TaskService : ITaskService
+{
+    
+    private readonly DataContext _context;
+
+    public TaskService(DataContext context)
+    {
+        _context = context;
+    }
+
+    public List<TodoTask> Index()
+    {
+       return _context.TodoTasks.ToList();
+    }
+
+    public void Create(Task task)
+    {
+        _context.Add(task);
+        _context.SaveChanges();
+    }
+
+
+    public Task Details(int id)
+    {
+        throw new NotImplementedException();
+
+    }
+
+    public void Delete(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Edit(Task task)
+    {
+        throw new NotImplementedException();
+    }
+}

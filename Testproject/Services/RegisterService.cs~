@@ -1,0 +1,30 @@
+﻿using Testproject.Data;
+using Testproject.Models;
+
+namespace Testproject.Services;
+
+public interface IRegisterService
+{
+    public void Register(User user);
+}
+
+public class RegisterService : IRegisterService
+{
+    private readonly DataContext _context;
+
+    public RegisterService(DataContext context)
+    {
+        _context = context;
+    }
+
+    public void Register(User user)
+    {
+        if (_context.Users.FirstOrDefault(u => u.Email == user.Email) is not null) return;
+        Console.WriteLine("Adicionou!!");
+        Console.WriteLine("Adicionou!!");
+        Console.WriteLine("Adicionou!!");
+        Console.WriteLine("Adicionou!!");
+        _context.Add(user);
+        _context.SaveChanges();
+    }
+}
