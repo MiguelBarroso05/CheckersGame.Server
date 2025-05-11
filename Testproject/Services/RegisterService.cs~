@@ -19,11 +19,7 @@ public class RegisterService : IRegisterService
 
     public void Register(User user)
     {
-        if (_context.Users.FirstOrDefault(u => u.Email == user.Email) is not null) return;
-        Console.WriteLine("Adicionou!!");
-        Console.WriteLine("Adicionou!!");
-        Console.WriteLine("Adicionou!!");
-        Console.WriteLine("Adicionou!!");
+        if (_context.Users.FirstOrDefault(u => u.Email == user.Email) is not null) return;♂☺
         _context.Add(user);
         _context.SaveChanges();
     }
